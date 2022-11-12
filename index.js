@@ -3,7 +3,6 @@ import { config } from "./utils/config.js";
 import { importCommands } from "./utils/importCommands.js";
 import { messageCreate } from "./utils/messageCreate.js";
 
-const Discord = require("discord.js");
 const { TOKEN, PREFIX } = config;
 
 const client = new Client({
