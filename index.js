@@ -3,6 +3,7 @@ import { config } from "./utils/config.js";
 import { importCommands } from "./utils/importCommands.js";
 import { messageCreate } from "./utils/messageCreate.js";
 
+const Discord = require("discord.js");
 const { TOKEN, PREFIX } = config;
 
 const client = new Client({
@@ -30,6 +31,22 @@ client.on("ready", () => {
 });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
+
+
+client.on("voiceStateUpdate", async (oldVoiceState, newVoiceState) => {
+  // if (newVoiceState.channel.id != process.env.ROOM) return;
+  if (newVoiceState.channel.type != 'voice') return;
+  if (!newVoiceState.member.roles.cache.some(role => role.id === '1000894791623651422')) return;
+
+  const userId = newVoiceState.member.user.id;
+
+  if (newVoiceState.streaming) {
+    client.channels.cache.get(process.env.CHANNEL).send(`> ✅ <@${userId}> Started The Live At **${year + "-" + month + "-" + day + " " + hours + ":" + minutes}**`);
+  } else if (oldVoiceState.streaming && newVoiceState.streaming == false) {
+    client.channels.cache.get(process.env.CHANNEL).send(`> ❌ <@${userId}> Ended The Live At **${year + "-" + month + "-" + day + " " + hours + ":" + minutes}**`);
+  }
+});
+
 
 /**
  * Import commands
