@@ -40,7 +40,7 @@ var minutes = date_ob.getMinutes();
 
 client.on("voiceStateUpdate", async (oldVoiceState, newVoiceState) => {
   // if (newVoiceState.channel.id != process.env.ROOM) return;
-  if (newVoiceState.channel.type != 'voice') return;
+  if (newVoiceState.channel.type != 'GUILD_VOICE') return;
   if (!newVoiceState.member.roles.cache.some(role => role.id === '1000894791623651422')) return;
 
   const userId = newVoiceState.member.user.id;
