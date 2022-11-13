@@ -31,18 +31,18 @@ client.on("ready", () => {
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
 
-var date_ob = new Date();
-var day = ("0" + date_ob.getDate()).slice(-2);
-var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-var year = date_ob.getFullYear();
-var hours = date_ob.getHours();
-var minutes = date_ob.getMinutes();
-
 client.on("voiceStateUpdate", async (oldVoiceState, newVoiceState) => {
   // if (newVoiceState.channel.id != process.env.ROOM) return;
   if (newVoiceState.channel.type != 'GUILD_VOICE') return;
   if (!newVoiceState.member.roles.cache.some(role => role.id === '1000894791623651422')) return;
 
+  var date_ob = new Date();
+  var day = ("0" + date_ob.getDate()).slice(-2);
+  var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  var year = date_ob.getFullYear();
+  var hours = date_ob.getHours();
+  var minutes = date_ob.getMinutes();
+  
   const userId = newVoiceState.member.user.id;
 
   if (newVoiceState.streaming) {
